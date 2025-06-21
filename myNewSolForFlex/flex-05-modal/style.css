@@ -1,0 +1,106 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background-color: white;
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.content-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f56565;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.text {
+    max-width: 400px;
+}
+
+.text h2 {
+    font-size: 1.25rem;
+    margin-top: 0;
+}
+
+.text p {
+    line-height: 1.4;
+    color: #555;
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+button.base-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid royalblue;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+button.continue {
+    background: royalblue;
+    color: white;
+}
+
+button.cancel {
+    background: white;
+    border-color: #ddd;
+    color: royalblue;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+
+    /* Center text using flex */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
