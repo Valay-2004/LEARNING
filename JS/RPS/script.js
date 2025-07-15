@@ -72,8 +72,8 @@ function playGame() {
   for (let i = 0; i < 5; i++) {
     playRound();
   }
-  alert(`Final Score:\nYou: ${humanScore} 😎\nComputer: ${computerScore} 🤖`);
-  console.log(`Final Score:\nYou: ${humanScore} 😎\nComputer: ${computerScore} 🤖`);
+  alert(`Final Score:\nTie: ${tie} 🤝\nYou: ${humanScore} 😎\nComputer: ${computerScore} 🤖 \n ! 👇 You can see the Result in Console also 👇 ! `);
+  console.log(`Final Score:\nTie: ${tie} 🤝\nYou: ${humanScore} 😎\nComputer: ${computerScore} 🤖`);
 }
 
 playGame();
