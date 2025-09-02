@@ -38,7 +38,9 @@ function updateResult(message) {
 }
 
 function updateScore() {
-  scoreDisplay.textContent = `Scores - You: ${humanScore} | Computer: ${computerScore} | Ties: ${tie}`;
+  scoreDisplay.textContent = `Scores - You: ${humanScore} | Computer: ${computerScore}`;
+  scoreDisplay.appendChild(document.createElement("br"));
+    scoreDisplay.appendChild(document.createTextNode(`Ties: ${tie}`));
 }
 
 function disableGame() {
