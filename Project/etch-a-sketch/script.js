@@ -1,4 +1,13 @@
 let giveNum;
+let isDrawing = false;
+let isEraser = false;
+const container = document.querySelector(".container");
+
+function toggleEraser(){
+    isEraser = !isEraser;
+    document.querySelector("#eraserBtn").textContent = isEraser ? "Eraser ON" : "Eraser OFF";
+}
+
 function giveCount() {
   giveNum = parseInt(prompt("Enter a Number (less than 100)", "16"));
   if (isNaN(giveNum) || giveNum <= 0 || giveNum > 100) {
@@ -8,8 +17,14 @@ function giveCount() {
   manyDivs(giveNum);
 }
 
+function getRandomRgbColor() {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
 function manyDivs(size) {
-  const container = document.querySelector(".container");
   //clear old grid
   container.innerHTML = "";
 
@@ -25,20 +40,31 @@ function manyDivs(size) {
     manyDiv.style.height = `${squareSize}px`;
     container.appendChild(manyDiv);
   }
+
   const grids = document.querySelectorAll(".grid-square");
-
   grids.forEach((square) => {
-    square.addEventListener("mouseover", () => {
-      square.style.backgroundColor = "lightblue";
+    square.addEventListener("click", () => {
+      isDrawing = !isDrawing;
+              if(isEraser){
+            square.style.backgroundColor = "white";
+        } else {
+            square.style.backgroundColor = getRandomRgbColor();
+        }
     });
 
-    square.addEventListener("mouseout", () => {
-      square.style.backgroundColor = "lightcoral";
+    square.addEventListener("mouseover", () => {
+      if (isDrawing) {
+        square.style.backgroundColor = getRandomRgbColor()
+      }
     });
+
+    // square.addEventListener("mouseout", () => {
+    //   square.style.backgroundColor = getRandomRgbColor();
+    // });
   });
 }
 
 // default grid for starting
-document.addEventListener('DOMContentLoaded', () => {
-    manyDivs(16);
+document.addEventListener("DOMContentLoaded", () => {
+  manyDivs(16);
 });

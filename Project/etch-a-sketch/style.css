@@ -10,6 +10,16 @@
     gap: 20px;
 }
 
+.note {
+  background: #f9f9f9;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #555;
+  font-style: italic;
+}
+
+
 button{
     margin-top: 10px;
     border: none;
