@@ -35,14 +35,12 @@ button:hover{
     display: flex;
     flex-wrap: wrap;
     align-content: center;
-    width: 650px;
-    height: 650px;
+    width: 960px;
+    height: 960px;
 }
 
 .grid-square{
     box-sizing: border-box;
-    width: 40px;
-    height: 40px;
     border: 1px solid #ccc;
     /* background-color: lightcoral; */
 }
