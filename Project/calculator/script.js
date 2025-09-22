@@ -1,3 +1,8 @@
+let firstOperand = null;
+let secondOperand = null;
+let currentOperator = null;
+let shouldResetDisplay = false;
+
 const add = (dig1, dig2) => {
   return dig1 + dig2;
 };
@@ -18,3 +23,7 @@ const divide = (dig1, dig2) => {
   }
   return dig1/ dig2;
 };
+
+function operate(dig1, dig2, operator) {
+    
+}
