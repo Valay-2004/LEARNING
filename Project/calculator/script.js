@@ -1,9 +1,20 @@
-function add(dig1, dig2) {
-    return dig1 + dig2;
-}
+const add = (dig1, dig2) => {
+  return dig1 + dig2;
+};
 
 const subtract = (dig1, dig2) => {
-    let big = Math.max(dig1, dig2);
-    let small = Math.min(dig1, dig2);
-    return big - small;
-}
+  const big = Math.max(dig1, dig2);
+  const small = Math.min(dig1, dig2);
+  return big - small;
+};
+
+const multiply = (dig1, dig2) => {
+  return Math.floor(dig1 * dig2);
+};
+
+const divide = (dig1, dig2) => {
+  if (dig2 === 0) {
+    alert(`Cannot Divide by ${dig2}!! \n You IDiot`);
+  }
+  return dig1/ dig2;
+};
