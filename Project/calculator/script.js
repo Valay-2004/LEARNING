@@ -44,5 +44,5 @@ buttons.forEach(button => {
       currentInput = "";
       display.textContent = "0";
     }
-  });
-});
+  })
+})
