@@ -1,29 +1,48 @@
-let firstOperand = null;
-let secondOperand = null;
-let currentOperator = null;
-let shouldResetDisplay = false;
+const display = document.getElementById("display");
+const buttons = document.querySelectorAll("button");
+let currentInput = "";
 
-const add = (dig1, dig2) => {
-  return dig1 + dig2;
+const add = (a, b) => {
+  return a + b;
 };
 
-const subtract = (dig1, dig2) => {
-  const big = Math.max(dig1, dig2);
-  const small = Math.min(dig1, dig2);
-  return big - small;
+const subtract = (a, b) => {
+  return a - b;
 };
 
-const multiply = (dig1, dig2) => {
-  return Math.floor(dig1 * dig2);
+const multiply = (a, b) => {
+  return Math.floor(a * b);
 };
 
-const divide = (dig1, dig2) => {
-  if (dig2 === 0) {
-    alert(`Cannot Divide by ${dig2}!! \n You IDiot`);
+const divide = (a, b) => {
+  if (b === 0) {
+    alert(`Cannot Divide by ${b}!! \n You IDiot`);
   }
-  return dig1/ dig2;
+  return a / b;
 };
 
-function operate(dig1, dig2, operator) {
-    
+function operate(a, b, operator) {
+  switch(operator){
+    case '+' : return add(a, b);
+    case '-' : return subtract(a, b);
+    case '*' : return multiply(a, b);
+    case '/' : return divide(a, b);
+    default: return null;
+  }
 }
+
+// Logic for buttons
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    const value = button.textContent;
+    
+    if(!isNaN(value)){
+      // If it's a number 
+      currentInput += value;
+      display.textContent = currentInput;
+    } else if(value === "C"){
+      currentInput = "";
+      display.textContent = "0";
+    }
+  });
+});
