@@ -8,6 +8,12 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+h1{
+    text-align: center;
+    padding-bottom: 20px;
+    color: whitesmoke;
+    font-weight: 500;
+}
 .calculator{
     width: 280px;
     background: #2a2a3d;

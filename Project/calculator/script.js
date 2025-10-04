@@ -44,11 +44,6 @@ function operate(a, b, operator) {
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     const value = button.textContent;
-    if (value === "+" || value === "-" || value === "*" || value === "/") {
-      firstOperand = Number(currentInput);
-      currentOperator = value;
-      shouldResetDisplay = true;
-    }
 
     if (value === "=") {
       secondOperand = Number(currentInput);
