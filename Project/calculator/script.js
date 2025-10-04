@@ -1,5 +1,9 @@
-const display = document.getElementById("display");
+const display = document.getElementById('display');
 const buttons = document.querySelectorAll("button");
+let firstOperand = null;
+let secondOperand = null;
+let currentOperator = null;
+let shouldResetDisplay = false;
 let currentInput = "";
 
 const add = (a, b) => {
@@ -22,27 +26,49 @@ const divide = (a, b) => {
 };
 
 function operate(a, b, operator) {
-  switch(operator){
-    case '+' : return add(a, b);
-    case '-' : return subtract(a, b);
-    case '*' : return multiply(a, b);
-    case '/' : return divide(a, b);
-    default: return null;
+  switch (operator) {
+    case "+":
+      return add(a, b);
+    case "-":
+      return subtract(a, b);
+    case "*":
+      return multiply(a, b);
+    case "/":
+      return divide(a, b);
+    default:
+      return null;
   }
 }
 
 // Logic for buttons
-buttons.forEach(button => {
+buttons.forEach((button) => {
   button.addEventListener("click", () => {
     const value = button.textContent;
-    
-    if(!isNaN(value)){
-      // If it's a number 
+    if (value === "+" || value === "-" || value === "*" || value === "/") {
+      firstOperand = Number(currentInput);
+      currentOperator = value;
+      shouldResetDisplay = true;
+    }
+
+    if (value === "=") {
+      secondOperand = Number(currentInput);
+      const result = operate(firstOperand, secondOperand, currentOperator);
+      display.textContent = result;
+      firstOperand = result;
+      shouldResetDisplay = true;
+    }
+
+    if (!isNaN(value)) {
+      if (shouldResetDisplay) {
+        currentInput = "";
+        shouldResetDisplay = false;
+      }
+      // If it's a number
       currentInput += value;
       display.textContent = currentInput;
-    } else if(value === "C"){
+    } else if (value === "C") {
       currentInput = "";
       display.textContent = "0";
     }
   })
-})
+});
