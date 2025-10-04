@@ -25,6 +25,7 @@ const divide = (a, b) => {
   return a / b;
 };
 
+
 function operate(a, b, operator) {
   switch (operator) {
     case "+":
@@ -56,6 +57,22 @@ buttons.forEach((button) => {
     if(value === "."){
       if(!currentInput.includes(".")){
         currentInput += ".";
+        display.textContent = currentInput;
+      }
+    }
+
+    // Toggle sign
+    if (value === "±" || value === "+/-"){
+      if(currentInput !== ""){
+        currentInput = (Number(currentInput) * -1).toString();
+        display.textContent = currentInput;
+      }
+    }
+
+    // Percentage
+    if(value === "%"){
+      if(currentInput !== ""){
+        currentInput = (Number(currentInput) / 100).toString();
         display.textContent = currentInput;
       }
     }
