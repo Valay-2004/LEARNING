@@ -58,6 +58,12 @@ buttons.forEach((button) => {
       shouldResetDisplay = true;
     }
 
+    if(value === "."){
+      if(!currentInput.includes(".")){
+        currentInput += ".";
+        display.textContent = currentInput;
+      }
+    }
     if(["+", "-", "*", "/"].includes(value)){
       firstOperand = Number(currentInput);
       currentOperator = value;
