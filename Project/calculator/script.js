@@ -58,6 +58,12 @@ buttons.forEach((button) => {
       shouldResetDisplay = true;
     }
 
+    if(["+", "-", "*", "/"].includes(value)){
+      firstOperand = Number(currentInput);
+      currentOperator = value;
+      display.textContent = firstOperand + " " + currentOperator;
+      shouldResetDisplay = true;
+    }
     if (!isNaN(value)) {
       if (shouldResetDisplay) {
         currentInput = "";
