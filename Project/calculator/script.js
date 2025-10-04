@@ -1,98 +1,111 @@
 const display = document.getElementById('display');
 const buttons = document.querySelectorAll("button");
+
 let firstOperand = null;
-let secondOperand = null;
 let currentOperator = null;
 let shouldResetDisplay = false;
 let currentInput = "";
 
-const add = (a, b) => {
-  return a + b;
-};
-
-const subtract = (a, b) => {
-  return a - b;
-};
-
-const multiply = (a, b) => {
-  return Math.floor(a * b);
-};
-
+// Basic operations
+const add = (a, b) => a + b;
+const subtract = (a, b) => a - b;
+const multiply = (a, b) => a * b;
 const divide = (a, b) => {
   if (b === 0) {
-    alert(`Cannot Divide by ${b}!! \n You IDiot`);
+    alert(`Cannot divide by zero!`);
+    return 0;
   }
   return a / b;
 };
 
-
 function operate(a, b, operator) {
-  switch (operator) {
-    case "+":
-      return add(a, b);
-    case "-":
-      return subtract(a, b);
-    case "*":
-      return multiply(a, b);
-    case "/":
-      return divide(a, b);
-    default:
-      return null;
+  switch(operator) {
+    case "+": return add(a, b);
+    case "-": return subtract(a, b);
+    case "*": return multiply(a, b);
+    case "/": return divide(a, b);
+    default: return null;
   }
 }
 
-// Logic for buttons
-buttons.forEach((button) => {
+// Update display safely
+function updateDisplay(value) {
+  display.textContent = value.length > 12 ? value.slice(0,12) : value;
+}
+
+// Handle button clicks
+buttons.forEach(button => {
   button.addEventListener("click", () => {
     const value = button.textContent;
 
-    if (value === "=") {
-      secondOperand = Number(currentInput);
-      const result = operate(firstOperand, secondOperand, currentOperator);
-      display.textContent = result;
-      firstOperand = result;
-      shouldResetDisplay = true;
+    // Clear
+    if (value === "C") {
+      currentInput = "";
+      firstOperand = null;
+      currentOperator = null;
+      shouldResetDisplay = false;
+      updateDisplay("0");
+      return;
     }
 
-    if(value === "."){
-      if(!currentInput.includes(".")){
+    // Decimal
+    if (value === ".") {
+      if (!currentInput.includes(".")) {
         currentInput += ".";
-        display.textContent = currentInput;
+        updateDisplay(currentInput);
       }
+      return;
     }
 
     // Toggle sign
-    if (value === "±" || value === "+/-"){
-      if(currentInput !== ""){
+    if (value === "±" || value === "+/-") {
+      if (currentInput !== "") {
         currentInput = (Number(currentInput) * -1).toString();
-        display.textContent = currentInput;
+        updateDisplay(currentInput);
       }
+      return;
     }
 
     // Percentage
-    if(value === "%"){
-      if(currentInput !== ""){
+    if (value === "%") {
+      if (currentInput !== "") {
         currentInput = (Number(currentInput) / 100).toString();
-        display.textContent = currentInput;
+        updateDisplay(currentInput);
       }
+      return;
     }
-    if(["+", "-", "*", "/"].includes(value)){
+
+    // Operator
+    if (["+", "-", "*", "/"].includes(value)) {
+      if (currentInput === "") return;
       firstOperand = Number(currentInput);
       currentOperator = value;
-      display.textContent = firstOperand + " " + currentOperator;
+      updateDisplay(`${firstOperand} ${currentOperator}`);
       shouldResetDisplay = true;
+      return;
     }
+
+    // Equals
+    if (value === "=") {
+      if (currentOperator === null || currentInput === "") return;
+      const secondOperand = Number(currentInput);
+      const result = operate(firstOperand, secondOperand, currentOperator);
+      currentInput = result.toString();
+      updateDisplay(currentInput);
+      firstOperand = result;
+      currentOperator = null;
+      shouldResetDisplay = true;
+      return;
+    }
+
+    // Number input
     if (!isNaN(value)) {
       if (shouldResetDisplay) {
         currentInput = "";
         shouldResetDisplay = false;
       }
-      // If it's a number
       currentInput += value;
-      display.textContent = currentInput;
-    } else if (value === "C") {
-      currentInput = "";
-      display.textContent = "0";
+      updateDisplay(currentInput);
     }
-  })
+  });
 });
